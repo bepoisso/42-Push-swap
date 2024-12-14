@@ -6,7 +6,7 @@
 #    By: bepoisso <bepoisso@student.42perpignan.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/21 18:34:37 by bepoisso          #+#    #+#              #
-#    Updated: 2024/08/29 14:27:12 by bepoisso         ###   ########.fr        #
+#    Updated: 2024/11/12 12:09:02 by bepoisso         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,9 +15,9 @@
 NAME = libft.a
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
-INC_PATH = ./includes
-SRC_PATH = ./srcs
-OBJ_PATH = ./objs
+INC_DIR = ./includes
+SRC_DIR = ./srcs
+OBJ_DIR = ./objs
 
 #_________________FILES_________________
 
@@ -65,10 +65,13 @@ SRC_FILES=\
 	ft_lstclear.c\
 	ft_lstiter.c\
 	ft_lstmap.c\
-	ft_printf.c
+	ft_printf.c\
+	ft_string.c\
+	ft_base.c\
+	get_next_line.c\
 
-SRCS = $(addprefix $(SRC_PATH)/, $(SRC_FILES))
-OBJS = $(addprefix $(OBJ_PATH)/, $(SRC_FILES:.c=.o))
+SRCS = $(addprefix $(SRC_DIR)/, $(SRC_FILES))
+OBJS = $(addprefix $(OBJ_DIR)/, $(SRC_FILES:.c=.o))
 
 #_________________RULES_________________
 
@@ -77,8 +80,8 @@ all: $(NAME)
 $(NAME): $(OBJS)
 	@ar rcs $@ $^
 
-$(OBJ_PATH)/%.o: $(SRC_PATH)/%.c | $(OBJ_PATH)
-	$(CC) $(CFLAGS) -I$(INC_PATH) -o $@ -c $<
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
+	$(CC) $(CFLAGS) -I$(INC_DIR) -o $@ -c $<
 
 clean:
 	rm -rf $(OBJS)
@@ -88,4 +91,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all clean fclean re bonus
+.PHONY: all clean fclean re
