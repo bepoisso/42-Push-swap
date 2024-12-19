@@ -6,7 +6,7 @@
 #    By: bepoisso <bepoisso@student.42perpignan.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/21 18:34:37 by bepoisso          #+#    #+#              #
-#    Updated: 2024/08/29 14:41:57 by bepoisso         ###   ########.fr        #
+#    Updated: 2024/12/19 12:04:01 by bepoisso         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,11 +45,10 @@ $(OBJ_DIR):
 clean:
 	@make clean -C libft
 	@rm -rf $(OBJ_DIR)
-	@rm -rf main.o
 
 fclean: clean
 	@make fclean -C libft
-	@rm -f $(NAME)
+	@rm -rf $(NAME)
 
 re: fclean all
 
