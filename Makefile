@@ -6,7 +6,7 @@
 #    By: bepoisso <bepoisso@student.42perpignan.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/21 18:34:37 by bepoisso          #+#    #+#              #
-#    Updated: 2024/12/19 12:04:01 by bepoisso         ###   ########.fr        #
+#    Updated: 2024/12/19 13:11:38 by bepoisso         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,7 +34,7 @@ all: $(NAME)
 	$(CC) $(CFLAGS) $(NAME)
 
 $(NAME): $(OBJS)
-	@make -C libft
+	@make all -C libft
 
 $(OBJS): $(SRCS) | $(OBJ_DIR)
 	@$(CC) $(CFLAGS) -c $< -o $@
