@@ -6,7 +6,7 @@
 #    By: bepoisso <bepoisso@student.42perpignan.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/21 18:34:37 by bepoisso          #+#    #+#              #
-#    Updated: 2024/12/19 13:11:38 by bepoisso         ###   ########.fr        #
+#    Updated: 2024/12/22 13:58:19 by bepoisso         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,6 +24,10 @@ OBJ_DIR = ./objs
 INC_DIR = ./includes
 
 SRC_FILES=\
+			push_swap.c\
+			operations.c\
+			sorting.c\
+			utils.c\
 
 SRCS = $(addprefix $(SRC_DIR)/, $(SRC_FILES))
 OBJS = $(addprefix $(OBJ_DIR)/, $(SRC_FILES:.c=.o))
