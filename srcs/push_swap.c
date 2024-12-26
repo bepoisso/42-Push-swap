@@ -6,7 +6,7 @@
 /*   By: bepoisso <bepoisso@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/22 13:56:13 by bepoisso          #+#    #+#             */
-/*   Updated: 2024/12/26 19:58:59 by bepoisso         ###   ########.fr       */
+/*   Updated: 2024/12/26 21:37:07 by bepoisso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,20 +47,22 @@ int	check_char(char *s)
 	return (0);
 }
 
-int	*parser_multarg(char **av, int ac)
+int	*parser_multarg(char **s, int ac)
 {
 	int		*tab;
 	int		i;
 	int		j;
 
 	i = 0;
+	if (ac <= 1)
+		return (ft_printf("Error\none nbr\n"), NULL);
 	tab = (int *)malloc(sizeof(int) * (ac - 1));
-	while (i < ac - 1)
+	while (i < ac)
 	{
 		j = 0;
-		if (ft_atoi(av[i + 1]) > INT_MAX || ft_atoi(av[i + 1]) < INT_MIN)
+		if (ft_atoi(s[i]) > INT_MAX || ft_atoi(s[i]) < INT_MIN)
 			return (ft_printf("Error\nint size\n"), NULL);
-		tab[i] = (int)ft_atoi(av[i + 1]);
+		tab[i] = (int)ft_atoi(s[i]);
 		while (j < i)
 		{
 			if (tab[j] == tab[i])
@@ -70,6 +72,18 @@ int	*parser_multarg(char **av, int ac)
 		i++;
 	}
 	return (tab);
+}
+
+int	*parser_singlearg(char *s)
+{
+	char	**result;
+	int		i;
+
+	i = 0;
+	result = ft_split(s, ' ');
+	while (result[i])
+		i++;
+	return (parser_multarg(result, i));
 }
 
 void	printtab(int *tab, int	size)
@@ -84,17 +98,21 @@ void	printtab(int *tab, int	size)
 	}
 }
 
-int main(int argc, char *argv[])
+int main(int ac, char *av[])
 {
 	int	*tab;
 
-	if (argc <= 1)
+	if (ac <= 1)
 		return (ft_printf("Error\nmissing arg\n"), 1);
-	if (check_chars(argv, argc) && argc > 2)
+	if (check_chars(av, ac) && ac > 2)
 		return (ft_printf("Error\narguments\n"), 1);
-	if (argc == 2 && check_char(argv[1]))
+	if (ac == 2 && check_char(av[1]))
 		return (ft_printf("Error\narguments\n"), 1);
-	tab = parser_multarg(argv, argc);
-	printtab(tab, argc - 1);
+	av++;
+	if (ac != 2)
+		tab = parser_multarg(av, ac - 1);
+	else
+		tab = parser_singlearg(av[0]);
+	printtab(tab, 10);
 	return (0);
 }
