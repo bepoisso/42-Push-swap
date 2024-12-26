@@ -6,7 +6,7 @@
 /*   By: bepoisso <bepoisso@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/22 13:56:13 by bepoisso          #+#    #+#             */
-/*   Updated: 2024/12/26 21:37:07 by bepoisso         ###   ########.fr       */
+/*   Updated: 2024/12/26 22:02:03 by bepoisso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int	*parser_multarg(char **s, int ac)
 	i = 0;
 	if (ac <= 1)
 		return (ft_printf("Error\none nbr\n"), NULL);
-	tab = (int *)malloc(sizeof(int) * (ac - 1));
+	tab = (int *)malloc(sizeof(int) * (ac));
 	while (i < ac)
 	{
 		j = 0;
@@ -74,16 +74,15 @@ int	*parser_multarg(char **s, int ac)
 	return (tab);
 }
 
-int	*parser_singlearg(char *s)
+int	*parser_singlearg(char *s, int *size)
 {
 	char	**result;
-	int		i;
 
-	i = 0;
+	*size = 0;
 	result = ft_split(s, ' ');
-	while (result[i])
-		i++;
-	return (parser_multarg(result, i));
+	while (result[*size])
+		(*size)++;
+	return (parser_multarg(result, *size));
 }
 
 void	printtab(int *tab, int	size)
@@ -98,9 +97,25 @@ void	printtab(int *tab, int	size)
 	}
 }
 
+int	check_sort(int *tab, int size)
+{
+	int	i;
+	
+	i = 0;
+	while (i + 1 < size)
+	{
+		if (tab[i] > tab[i + 1])
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
 int main(int ac, char *av[])
 {
-	int	*tab;
+	int	*a;
+	int	*b;
+	int	size;
 
 	if (ac <= 1)
 		return (ft_printf("Error\nmissing arg\n"), 1);
@@ -110,9 +125,19 @@ int main(int ac, char *av[])
 		return (ft_printf("Error\narguments\n"), 1);
 	av++;
 	if (ac != 2)
-		tab = parser_multarg(av, ac - 1);
+	{
+		a = parser_multarg(av, ac - 1);
+		size = ac - 1;
+	}
 	else
-		tab = parser_singlearg(av[0]);
-	printtab(tab, 10);
+		a = parser_singlearg(av[0], &size);
+	if (a == NULL)
+		return (1);
+	printtab(a, size);
+	if (check_sort(a, size))
+		return (ft_printf("Error\nallready sort\n"), 1);
+	b = (int *)malloc(sizeof(int) * (size));
+	ft_memset(b , 0, size);
+	printtab(b, size);
 	return (0);
 }
