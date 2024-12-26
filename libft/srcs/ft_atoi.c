@@ -6,15 +6,15 @@
 /*   By: bepoisso <bepoisso@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 00:29:30 by bepoisso          #+#    #+#             */
-/*   Updated: 2024/11/12 10:27:24 by bepoisso         ###   ########.fr       */
+/*   Updated: 2024/12/26 19:02:27 by bepoisso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/libft.h"
 
-int	ft_atoi(const char *nptr)
+long	ft_atoi(const char *nptr)
 {
-	int	result;
+	long	result;
 	int	neg;
 	int	i;
 

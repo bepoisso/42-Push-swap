@@ -6,7 +6,7 @@
 #    By: bepoisso <bepoisso@student.42perpignan.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/21 18:34:37 by bepoisso          #+#    #+#              #
-#    Updated: 2024/12/22 13:58:19 by bepoisso         ###   ########.fr        #
+#    Updated: 2024/12/26 18:20:54 by bepoisso         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@
 
 NAME = push_swap
 CC= gcc
-CFLAGS = -Wall -Wextra -Werror -I$(INC_DIR)
+CFLAGS = -Wall -Wextra -Werror -g -I$(INC_DIR)
 
 #_________________FILES_________________
 
@@ -35,13 +35,13 @@ OBJS = $(addprefix $(OBJ_DIR)/, $(SRC_FILES:.c=.o))
 #_________________RULES_________________
 
 all: $(NAME)
-	$(CC) $(CFLAGS) $(NAME)
 
 $(NAME): $(OBJS)
-	@make all -C libft
+	@make -C libft
+	$(CC) $(CFLAGS) $(OBJS) -Llibft -lft -o $(NAME)
 
-$(OBJS): $(SRCS) | $(OBJ_DIR)
-	@$(CC) $(CFLAGS) -c $< -o $@
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
+	$(CC) $(CFLAGS) -c $< -o $@
 
 $(OBJ_DIR):
 	@mkdir -p $(OBJ_DIR)
@@ -52,8 +52,11 @@ clean:
 
 fclean: clean
 	@make fclean -C libft
-	@rm -rf $(NAME)
+	@rm -f $(NAME)
 
 re: fclean all
+
+debug: re
+	gdb -tui -q push_swap
 
 .PHONY: all clean fclean re
