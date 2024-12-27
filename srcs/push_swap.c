@@ -6,7 +6,7 @@
 /*   By: bepoisso <bepoisso@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/22 13:56:13 by bepoisso          #+#    #+#             */
-/*   Updated: 2024/12/27 11:20:43 by bepoisso         ###   ########.fr       */
+/*   Updated: 2024/12/27 12:08:43 by bepoisso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,8 +104,13 @@ int main(int ac, char *av[])
 		return (ft_printf("Error\nallready sort\n"), 1);
 
 	// PARSER STACK
+	(void)b;
 	ft_printf("\n****STACK****\n");
 	a = stack_parser(tab, size);
+	print_stack(a);
+	ft_printf("\n****MANIP****\n");
+	sb(&a, 0);
+	stack_index(&a);
 	print_stack(a);
 	return (0);
 }

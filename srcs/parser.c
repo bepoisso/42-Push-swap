@@ -6,7 +6,7 @@
 /*   By: bepoisso <bepoisso@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/27 10:15:40 by bepoisso          #+#    #+#             */
-/*   Updated: 2024/12/27 11:19:33 by bepoisso         ###   ########.fr       */
+/*   Updated: 2024/12/27 12:07:30 by bepoisso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void print_stack(t_stack *stack)
 {
 	while (stack)
 	{
-		ft_printf("%d\n", stack->data);
+		ft_printf("%d : %d\n",stack->index, stack->data);
 		stack = stack->next;
 	}
 }

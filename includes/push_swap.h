@@ -6,7 +6,7 @@
 /*   By: bepoisso <bepoisso@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 17:23:54 by bepoisso          #+#    #+#             */
-/*   Updated: 2024/12/27 11:00:59 by bepoisso         ###   ########.fr       */
+/*   Updated: 2024/12/27 12:08:28 by bepoisso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 //_________________Function_________________
 typedef struct s_stack
 {
+	int		index;
 	int		data;
 	struct s_stack	*next;
 	struct s_stack	*prev;
@@ -40,6 +41,11 @@ int	stack_size(t_stack *stack);
 t_stack *stack_last(t_stack *stack);
 void	stack_add_back(t_stack **stack, t_stack *new);
 void	stack_add_front(t_stack **stack, t_stack *new);
+void	stack_index(t_stack **stack);
+
+//_________________Operation_________________
+void	sa(t_stack **a, int print);
+void	sb(t_stack **b, int print);
 
 //_________________Temp_________________
 void	printtab(int *tab, int	size);
