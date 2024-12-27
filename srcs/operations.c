@@ -6,7 +6,7 @@
 /*   By: bepoisso <bepoisso@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/22 13:56:10 by bepoisso          #+#    #+#             */
-/*   Updated: 2024/12/27 12:07:44 by bepoisso         ###   ########.fr       */
+/*   Updated: 2024/12/27 13:03:18 by bepoisso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,12 +43,72 @@ void	ss(t_stack **a, t_stack **b)
 	ft_printf("ss\n");
 }
 
-// void	ra(t_stack **a, int print)
-// {
-// 	t_stack	*temp;
+void	ra(t_stack **a, int print)
+{
+	t_stack	*temp;
 
-// 	if (stack_size(*a) < 2)
-// 		return ;
-// 	temp = *a;
+	if (stack_size(*a) < 2)
+		return ;
+	temp = *a;
+	*a = (*a)->next;
+	(*a)->prev = NULL;
+	stack_add_back(a, temp);
+	if (print)
+		ft_printf("ra\n");
+}
+
+void	rb(t_stack **b, int print)
+{
+	ra(b, 0);
+	if (print)
+		ft_printf("rb\n");
+}
+
+void	rr(t_stack **a, t_stack **b)
+{
+	ra(a, 0);
+	rb(b, 0);
+	ft_printf("rr\n");
+}
+
+void	rra(t_stack **a, int print)
+{
+	t_stack *temp;
 	
-// }
+	temp = stack_last(*a);
+	temp->prev->next = NULL;
+	stack_add_front(a, temp);
+	if (print)
+		ft_printf("rra\n");
+}
+
+void	rrb(t_stack **b, int print)
+{
+	rra(b, 0);
+	if (print)
+		ft_printf("rrb\n");
+}
+
+void	rrr(t_stack **a, t_stack **b)
+{
+	rra(a, 0);
+	rrb(b, 0);
+	ft_printf("rrr\n");
+}
+
+void	pa(t_stack **a, t_stack **b, int print)
+{
+	t_stack	*temp;
+
+	temp = *b;
+	*b = (*b)->next;
+	stack_add_front(a, temp);
+	if (print)
+		ft_printf("pa\n");
+}
+
+void	pb(t_stack **a, t_stack **b)
+{
+	pa(b, a, 0);
+	ft_printf("pb\n");
+}

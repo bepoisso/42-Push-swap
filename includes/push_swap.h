@@ -6,7 +6,7 @@
 /*   By: bepoisso <bepoisso@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 17:23:54 by bepoisso          #+#    #+#             */
-/*   Updated: 2024/12/27 12:08:28 by bepoisso         ###   ########.fr       */
+/*   Updated: 2024/12/27 13:03:35 by bepoisso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,16 @@ void	stack_index(t_stack **stack);
 //_________________Operation_________________
 void	sa(t_stack **a, int print);
 void	sb(t_stack **b, int print);
+void	ss(t_stack **a, t_stack **b);
+void	ra(t_stack **a, int print);
+void	rb(t_stack **b, int print);
+void	rr(t_stack **a, t_stack **b);
+void	rra(t_stack **a, int print);
+void	rrb(t_stack **b, int print);
+void	rrr(t_stack **a, t_stack **b);
+void	pa(t_stack **a, t_stack **b, int print);
+void	pb(t_stack **a, t_stack **b);
+
 
 //_________________Temp_________________
 void	printtab(int *tab, int	size);
