@@ -6,7 +6,7 @@
 /*   By: bepoisso <bepoisso@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 17:23:54 by bepoisso          #+#    #+#             */
-/*   Updated: 2024/12/27 13:03:35 by bepoisso         ###   ########.fr       */
+/*   Updated: 2024/12/27 14:59:11 by bepoisso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,9 @@ void	rrb(t_stack **b, int print);
 void	rrr(t_stack **a, t_stack **b);
 void	pa(t_stack **a, t_stack **b, int print);
 void	pb(t_stack **a, t_stack **b);
+
+//_________________Sorting_________________
+void	sorting(t_stack **a, t_stack **b);
 
 
 //_________________Temp_________________

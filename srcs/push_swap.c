@@ -6,7 +6,7 @@
 /*   By: bepoisso <bepoisso@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/22 13:56:13 by bepoisso          #+#    #+#             */
-/*   Updated: 2024/12/27 13:03:52 by bepoisso         ###   ########.fr       */
+/*   Updated: 2024/12/27 14:52:14 by bepoisso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,9 +76,7 @@ int	check_sort(int *tab, int size)
 int main(int ac, char *av[])
 {
 	int		*tab;
-	int		*tabb;
 	int		size;
-	int		sizeb;
 	t_stack	*a;
 	t_stack	*b;
 
@@ -102,25 +100,11 @@ int main(int ac, char *av[])
 	if (tab == NULL)
 		return (1);
 	if (check_sort(tab, size))
-		return (ft_printf("Error\nallready sort\n"), 1);
+		return (0);
 
 	// PARSER STACK
-	tabb = parser_singlearg("80 60 70 90 30 40 20 10", &sizeb);
 	a = stack_parser(tab, size);
-	b = stack_parser(tabb, sizeb);
-	ft_printf("\n****stack a****\n");
-	stack_index(&a);
-	print_stack(a);
-	ft_printf("\n****stack b****\n");
-	stack_index(&b);
-	print_stack(b);
-	ft_printf("\n****MANIP****\n");
-	pb(&a, &b);
-	ft_printf("\n****stack a****\n");
-	stack_index(&a);
-	print_stack(a);
-	ft_printf("\n****stack b****\n");
-	stack_index(&b);
-	print_stack(b);
+	b = NULL;
+	sorting(&a, &b);
 	return (0);
 }

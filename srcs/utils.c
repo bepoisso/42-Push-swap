@@ -6,7 +6,7 @@
 /*   By: bepoisso <bepoisso@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/22 13:56:18 by bepoisso          #+#    #+#             */
-/*   Updated: 2024/12/27 12:35:30 by bepoisso         ###   ########.fr       */
+/*   Updated: 2024/12/27 14:17:30 by bepoisso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ void	stack_add_front(t_stack **stack, t_stack *new)
 	if (!*stack)
 	{
 		*stack = new;
+		(*stack)->next = NULL;
 		return ;
 	}
 	new->next = *stack;
