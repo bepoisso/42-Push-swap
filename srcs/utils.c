@@ -6,7 +6,7 @@
 /*   By: bepoisso <bepoisso@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/22 13:56:18 by bepoisso          #+#    #+#             */
-/*   Updated: 2024/12/27 17:13:49 by bepoisso         ###   ########.fr       */
+/*   Updated: 2024/12/27 18:13:36 by bepoisso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,4 +99,11 @@ void	stack_index(t_stack **stack)
 		current->index = ++i;
 		current = current->next;
 	}
+}
+
+long	ft_abs(long	nbr)
+{
+	if (nbr < 0)
+		return (-nbr);
+	return (nbr);
 }

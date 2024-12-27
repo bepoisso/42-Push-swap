@@ -6,7 +6,7 @@
 /*   By: bepoisso <bepoisso@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 17:23:54 by bepoisso          #+#    #+#             */
-/*   Updated: 2024/12/27 17:04:49 by bepoisso         ###   ########.fr       */
+/*   Updated: 2024/12/27 18:20:43 by bepoisso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,12 @@ typedef struct s_stack
 }	t_stack;
 
 //_________________Function_________________
-int	check_chars(char **s, int ac);
-int	check_char(char *s);
-int	*parser_multarg(char **av, int ac);
-int	*parser_singlearg(char *s, int *size);
+int		check_chars(char **s, int ac);
+int		check_char(char *s);
+int		*parser_multarg(char **av, int ac);
+int		*parser_singlearg(char *s, int *size);
 t_stack	*stack_parser(int *tab, int size);
+long	ft_abs(long	nbr);
 
 //_________________Stack_manip_________________
 t_stack	*stack_new(int data);
@@ -66,6 +67,9 @@ void	sort_tree(t_stack **a);
 t_stack	*find_biggest(t_stack *stack);
 t_stack	*find_lowest(t_stack *stack);
 int		check_sorted(t_stack *stack);
+void	sort_algorithm(t_stack **a, t_stack **b);
+void	best_score(t_stack **a, t_stack **b);
+void	stack_init(t_stack **a, t_stack **b);
 
 
 //_________________Temp_________________

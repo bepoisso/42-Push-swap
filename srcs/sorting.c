@@ -6,7 +6,7 @@
 /*   By: bepoisso <bepoisso@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/22 13:56:15 by bepoisso          #+#    #+#             */
-/*   Updated: 2024/12/27 17:15:07 by bepoisso         ###   ########.fr       */
+/*   Updated: 2024/12/27 18:59:18 by bepoisso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,21 +65,36 @@ t_stack	*find_lowest(t_stack *stack)
 		}
 		stack = stack->next;
 	}
-	retrun (index);
+	return (index);
 }
 
-int	check_sorted(t_stack *stack)
+int check_sorted(t_stack *stack)
 {
-	int	nbr;
-
-	nbr = stack->data;
-	while (stack)
+	while (stack && stack->next)
 	{
-		if (stack->data < nbr)
-			return (0);
+		if (stack->data > stack->next->data)
+			return 0;
 		stack = stack->next;
 	}
-	return (1);
+	return 1;
+}
+
+void	best_score(t_stack **a, t_stack **b)
+{
+	t_stack	*top;
+	t_stack *bottom;
+	long	score;
+
+	top = *b;
+	bottom = stack_last(*b);
+	score = ft_abs((*a)->data - top->data);	
+	if (ft_abs((*a)->data - bottom->data) < score)
+	{
+		pb(a, b);
+		rb(b, 1);
+	}
+	else
+		pb(a, b);
 }
 
 void	stack_init(t_stack **a, t_stack **b)
@@ -91,15 +106,35 @@ void	stack_init(t_stack **a, t_stack **b)
 void	sort_algorithm(t_stack **a, t_stack **b)
 {
 	int	size_a;
+	int	size_b;
 
 	size_a = stack_size(*a);
-	if (size_a-- > 3 && !check_sorted(*a));
+	if (size_a-- > 3 && !check_sorted(*a))
 		pb(a, b);
-	if (size_a-- > 3 && !check_sorted(*a));
+	if (size_a-- > 3 && !check_sorted(*a))
 		pb(a, b);
-	while (size_a-- > 3 && !check_sorted(*a))
+	if (check_sorted(*b))
+		sb(b, 1);
+	while(!check_sorted(*a))
 	{
-		
+		while (size_a > 3 && !check_sorted(*a))
+		{
+			best_score(a, b);
+			size_a = stack_size(*a);
+		}
+		size_b = stack_size(*b);
+		ft_printf("ICCCCCI");
+		int i = 0;
+		while (size_b > 0 && !check_sorted(*a))
+		{
+			best_score(b, a);
+			size_b = stack_size(*b);
+			if (i > 999)
+				break ;
+			i++;
+		}
+		if (i > 999)
+			break ;
 	}
 }
 
@@ -113,6 +148,6 @@ void	sorting(t_stack **a, t_stack **b)
 		sa(a, 1);
 	else if (size == 3)
 		sort_tree(a);
-	// else if (size > 3)
-	// 	sort_algorithm(a, b);
+	else if (size > 3)
+		sort_algorithm(a, b);
 }

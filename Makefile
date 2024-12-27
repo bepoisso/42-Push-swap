@@ -6,7 +6,7 @@
 #    By: bepoisso <bepoisso@student.42perpignan.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/21 18:34:37 by bepoisso          #+#    #+#              #
-#    Updated: 2024/12/27 11:02:25 by bepoisso         ###   ########.fr        #
+#    Updated: 2024/12/27 18:39:50 by bepoisso         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,11 +48,11 @@ $(OBJ_DIR):
 	@mkdir -p $(OBJ_DIR)
 
 clean:
-	@make clean -C libft
+	@make clean -C libft > /dev/null 2>&1
 	@rm -rf $(OBJ_DIR)
 
 fclean: clean
-	@make fclean -C libft
+	@make fclean -C libft > /dev/null 2>&1
 	@rm -f $(NAME)
 
 re: fclean all

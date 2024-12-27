@@ -6,7 +6,7 @@
 #    By: bepoisso <bepoisso@student.42perpignan.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/21 18:34:37 by bepoisso          #+#    #+#              #
-#    Updated: 2024/12/19 12:20:22 by bepoisso         ###   ########.fr        #
+#    Updated: 2024/12/27 18:40:33 by bepoisso         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -79,19 +79,20 @@ OBJS = $(addprefix $(OBJ_DIR)/, $(SRC_FILES:.c=.o))
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	@ar rcs $@ $^
+	@ar rcs $@ $^ > /dev/null 2>&1
+	@echo "Libft ✅"
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
-	$(CC) $(CFLAGS) -I$(INC_DIR) -o $@ -c $<
+	@$(CC) $(CFLAGS) -I$(INC_DIR) -o $@ -c $< > /dev/null 2>&1
 
 $(OBJ_DIR):
-	@mkdir -p $(OBJ_DIR)
+	@mkdir -p $(OBJ_DIR) > /dev/null 2>&1
 
 clean:
-	rm -rf $(OBJS)
+	@rm -rf $(OBJS) > /dev/null 2>&1
 
 fclean: clean
-	rm -f $(NAME)
+	@rm -f $(NAME) > /dev/null 2>&1
 
 re: fclean all
 
