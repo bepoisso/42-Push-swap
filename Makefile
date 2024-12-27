@@ -6,7 +6,7 @@
 #    By: bepoisso <bepoisso@student.42perpignan.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/21 18:34:37 by bepoisso          #+#    #+#              #
-#    Updated: 2024/12/26 21:32:01 by bepoisso         ###   ########.fr        #
+#    Updated: 2024/12/27 11:02:25 by bepoisso         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,6 +28,7 @@ SRC_FILES=\
 			operations.c\
 			sorting.c\
 			utils.c\
+			parser.c\
 
 SRCS = $(addprefix $(SRC_DIR)/, $(SRC_FILES))
 OBJS = $(addprefix $(OBJ_DIR)/, $(SRC_FILES:.c=.o))

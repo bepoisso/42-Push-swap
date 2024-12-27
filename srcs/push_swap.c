@@ -6,7 +6,7 @@
 /*   By: bepoisso <bepoisso@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/22 13:56:13 by bepoisso          #+#    #+#             */
-/*   Updated: 2024/12/26 22:17:21 by bepoisso         ###   ########.fr       */
+/*   Updated: 2024/12/27 11:20:43 by bepoisso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,44 +47,6 @@ int	check_char(char *s)
 	return (0);
 }
 
-int	*parser_multarg(char **s, int ac)
-{
-	int		*tab;
-	int		i;
-	int		j;
-
-	i = 0;
-	if (ac <= 1)
-		return (ft_printf("Error\none nbr\n"), NULL);
-	tab = (int *)malloc(sizeof(int) * (ac));
-	while (i < ac)
-	{
-		j = 0;
-		if (ft_atoi(s[i]) > INT_MAX || ft_atoi(s[i]) < INT_MIN)
-			return (ft_printf("Error\nint size\n"), NULL);
-		tab[i] = (int)ft_atoi(s[i]);
-		while (j < i)
-		{
-			if (tab[j] == tab[i])
-				return (ft_printf("Error\ndouble\n"), NULL);
-			j++;
-		}
-		i++;
-	}
-	return (tab);
-}
-
-int	*parser_singlearg(char *s, int *size)
-{
-	char	**result;
-
-	*size = 0;
-	result = ft_split(s, ' ');
-	while (result[*size])
-		(*size)++;
-	return (parser_multarg(result, *size));
-}
-
 void	printtab(int *tab, int	size)
 {
 	int	i;
@@ -113,10 +75,12 @@ int	check_sort(int *tab, int size)
 
 int main(int ac, char *av[])
 {
-	int	*a;
-	int	*b;
-	int	size;
+	int		*tab;
+	int		size;
+	t_stack	*a;
+	t_stack	*b;
 
+	// ERROR GEST
 	if (ac <= 1)
 		return (ft_printf("Error\nmissing arg\n"), 1);
 	if (check_chars(av, ac) && ac > 2)
@@ -124,20 +88,24 @@ int main(int ac, char *av[])
 	if (ac == 2 && check_char(av[1]))
 		return (ft_printf("Error\narguments\n"), 1);
 	av++;
+	
+	// PARSER
 	if (ac != 2)
 	{
-		a = parser_multarg(av, ac - 1);
+		tab = parser_multarg(av, ac - 1);
 		size = ac - 1;
 	}
 	else
-		a = parser_singlearg(av[0], &size);
-	if (a == NULL)
+		tab = parser_singlearg(av[0], &size);
+	if (tab == NULL)
 		return (1);
-	printtab(a, size);
-	if (check_sort(a, size))
+	printtab(tab, size);
+	if (check_sort(tab, size))
 		return (ft_printf("Error\nallready sort\n"), 1);
-	b = (int *)malloc(sizeof(int) * (size));
-	ft_memset(b , 0, size);
-	printtab(b, size);
+
+	// PARSER STACK
+	ft_printf("\n****STACK****\n");
+	a = stack_parser(tab, size);
+	print_stack(a);
 	return (0);
 }
