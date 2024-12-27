@@ -6,7 +6,7 @@
 /*   By: bepoisso <bepoisso@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 17:23:54 by bepoisso          #+#    #+#             */
-/*   Updated: 2024/12/27 14:59:11 by bepoisso         ###   ########.fr       */
+/*   Updated: 2024/12/27 17:04:49 by bepoisso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,10 @@ typedef struct s_stack
 {
 	int		index;
 	int		data;
+	int		push_cost;
+	int		above_median;
+	int		cheapest;
+	struct s_stack	*target;
 	struct s_stack	*next;
 	struct s_stack	*prev;
 }	t_stack;
@@ -37,8 +41,8 @@ t_stack	*stack_parser(int *tab, int size);
 
 //_________________Stack_manip_________________
 t_stack	*stack_new(int data);
-int	stack_size(t_stack *stack);
-t_stack *stack_last(t_stack *stack);
+int		stack_size(t_stack *stack);
+t_stack	*stack_last(t_stack *stack);
 void	stack_add_back(t_stack **stack, t_stack *new);
 void	stack_add_front(t_stack **stack, t_stack *new);
 void	stack_index(t_stack **stack);
@@ -58,6 +62,10 @@ void	pb(t_stack **a, t_stack **b);
 
 //_________________Sorting_________________
 void	sorting(t_stack **a, t_stack **b);
+void	sort_tree(t_stack **a);
+t_stack	*find_biggest(t_stack *stack);
+t_stack	*find_lowest(t_stack *stack);
+int		check_sorted(t_stack *stack);
 
 
 //_________________Temp_________________
