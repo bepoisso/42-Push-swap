@@ -6,16 +6,18 @@
 /*   By: bepoisso <bepoisso@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/22 13:56:15 by bepoisso          #+#    #+#             */
-/*   Updated: 2024/12/28 12:29:49 by bepoisso         ###   ########.fr       */
+/*   Updated: 2024/12/28 20:07:54 by bepoisso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-void	sort_tree(t_stack **a)
+void	sort_three(t_stack **a)
 {
 	t_stack	*biggest;
-	
+
+	if (check_sorted(*a))
+		return ;
 	biggest = find_biggest(*a);
 	if (biggest == *a)
 		ra(a, 1);
@@ -79,95 +81,102 @@ int check_sorted(t_stack *stack)
 	return 1;
 }
 
-void	best_score(t_stack **a, t_stack **b, long long result)
-{
-	t_stack	*second;
-	t_stack	*bottom;
-	
-
-	(*a)->score = ft_abs((*a)->data - result);
-	second = (*a)->next;
-	second->score = ft_abs(second->data - result);
-	bottom = stack_last(*a);
-	bottom->score = ft_abs(bottom->data - result);
-	if ((*a)->score < second->score && (*a)->score < bottom->score)
-		pb(a, b);
-	else if (second->score < (*a)->score && second->score < bottom->score)
-	{
-		sa(a, 1);
-		pb(a, b);
-	}
-	else if (bottom->score < second->score && bottom->score < (*a)->score)
-	{
-		rra(a, 1);
-		pb(a, b);
-	}
-}
-
-void	stack_init(t_stack **a, t_stack **b)
+void	a_get_your_target(t_stack *node, t_stack **b)
 {
 	t_stack	*current;
-	
-	current = *a;
-	stack_index(a);
-	stack_index(b);
-	while(current)
+	t_stack	*closest;
+	long	min_diff;
+	long	diff;
+
+	current = *b;
+	closest = NULL;
+	min_diff = LONG_MAX;
+	while (current)
 	{
-		current->target = *b;
+		if (current->data < node->data)
+		{
+			diff = node->data - current->data;
+			if (diff < min_diff)
+			{
+				min_diff = diff;
+				closest = current;
+			}
+		}
 		current = current->next;
 	}
+	if (!closest)
+		node->target = find_biggest(*b);
+	node->target = closest;
 }
 
-void	push_median(t_stack **a, t_stack **b)
+void	init_target(t_stack **a, t_stack **b)
 {
-	long long	result;
-	int			size;
-	t_stack		*current;
+	t_stack	*current;
 
-	result = 0;
-	size = stack_size(*a);
 	current = *a;
 	while (current)
 	{
-		result += current->data;
+		a_get_your_target(current, b);
 		current = current->next;
 	}
-	result /= size;
-	best_score(a, b, result);
+	
+}
+
+void	push_coast(t_stack **a, t_stack **b)
+{
+	// A faire bon courage j'ai la flemme
+
+	// Trouver le node la moins chere a push
+			// /!\ On ne compte pas le pb() dans les mouve
+			// la formule :		x mouve pour envoyer en top a
+			// 				+	x mouve pour envoyer la node au dessus de la target
+			//				=	Push cost
+			// si on trouve un push cost de 0 on s'arrete par ce que rien ne peut etre en dessous
+			// exemple pour push	25 = 0 (pb) (A PAS TROP PRENDRE EN COMPTE)
+			// 						-38 = 1 (pb + rrb) (on mets 99 en haut et on push)
+			// 						10 = 1 (ss + pb) (10 doit etre au desus de 0 donc on ss puis pb)
+			// 						7 = 3 (sb + rra + rra  + pb)
+			// 						42 = 1 (rra + pb)
 }
 
 void	sort_algorithm(t_stack **a, t_stack **b)
 {
-	int	size_a;
+	int	size;
 
-	size_a = stack_size(*a);
-	if (size_a-- > 3 && !check_sorted(*a))
+	size = stack_size(*a) + 1;
+	if (--size > 3 && !check_sorted(*a))
 		pb(a, b);
-	size_a = stack_size(*a);
-	stack_init(a, b);
-	while(size_a >= 0)
+	if (--size > 3 && !check_sorted(*a))
+		pb(a, b);
+	while (size > 3 /* && !check_sorted(*a) */)
 	{
-		if ((*a)->data < (*a)->target->data)
-		{
-			pb(a, b);
-			rb(b, 1);
-		}
-		else
-			pb(a, b);
-		size_a = stack_size(*a);
+		init_target(a, b);
+		push_coast(a, b);
+		size--;
+	}
+	sort_three(a);
+	while(*b)
+	{
+		// push toutes les node b dans la stack a
+	// On calcule la target de chaque node b
+		// la target est le nombre le plus grand et le plus prets
+	// On push la node au dessus de ca target
+		// si la target est au dessus de la mediane
+			// on rotate (ra) jusqua avoir la target en haut
+		// si la target est en dessuous de la mediane
+			// on revers rotate (rra) jusqua avoir la target en haut
 	}
 }
 
 void	sorting(t_stack **a, t_stack **b)
 {
 	int	size;
-	(void)b;
-	
+
 	size = stack_size(*a);
 	if (size == 2)
 		sa(a, 1);
 	else if (size == 3)
-		sort_tree(a);
+		sort_three(a);
 	else if (size > 3)
 		sort_algorithm(a, b);
 }

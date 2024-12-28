@@ -6,7 +6,7 @@
 /*   By: bepoisso <bepoisso@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 17:23:54 by bepoisso          #+#    #+#             */
-/*   Updated: 2024/12/28 12:22:28 by bepoisso         ###   ########.fr       */
+/*   Updated: 2024/12/28 19:36:18 by bepoisso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ typedef struct s_stack
 {
 	int				index;
 	int				data;
-	long long		score;
+	int				score;
 	struct s_stack	*target;
 	struct s_stack	*next;
 	struct s_stack	*prev;
@@ -61,13 +61,11 @@ void	pb(t_stack **a, t_stack **b);
 
 //_________________Sorting_________________
 void	sorting(t_stack **a, t_stack **b);
-void	sort_tree(t_stack **a);
+void	sort_three(t_stack **a);
 t_stack	*find_biggest(t_stack *stack);
 t_stack	*find_lowest(t_stack *stack);
 int		check_sorted(t_stack *stack);
 void	sort_algorithm(t_stack **a, t_stack **b);
-void	best_score(t_stack **a, t_stack **b, long long result);
-void	stack_init(t_stack **a, t_stack **b);
 
 
 //_________________Temp_________________

@@ -6,7 +6,7 @@
 /*   By: bepoisso <bepoisso@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/22 13:56:18 by bepoisso          #+#    #+#             */
-/*   Updated: 2024/12/27 18:13:36 by bepoisso         ###   ########.fr       */
+/*   Updated: 2024/12/28 17:51:41 by bepoisso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ int	stack_size(t_stack *stack)
 	int	i;
 
 	i = 0;
+	if (!stack)
+		return (0);
 	while (stack)
 	{
 		stack = stack->next;
