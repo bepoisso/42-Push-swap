@@ -6,7 +6,7 @@
 /*   By: bepoisso <bepoisso@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/22 13:56:15 by bepoisso          #+#    #+#             */
-/*   Updated: 2024/12/27 18:59:18 by bepoisso         ###   ########.fr       */
+/*   Updated: 2024/12/28 12:29:49 by bepoisso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,62 +79,82 @@ int check_sorted(t_stack *stack)
 	return 1;
 }
 
-void	best_score(t_stack **a, t_stack **b)
+void	best_score(t_stack **a, t_stack **b, long long result)
 {
-	t_stack	*top;
-	t_stack *bottom;
-	long	score;
+	t_stack	*second;
+	t_stack	*bottom;
+	
 
-	top = *b;
-	bottom = stack_last(*b);
-	score = ft_abs((*a)->data - top->data);	
-	if (ft_abs((*a)->data - bottom->data) < score)
+	(*a)->score = ft_abs((*a)->data - result);
+	second = (*a)->next;
+	second->score = ft_abs(second->data - result);
+	bottom = stack_last(*a);
+	bottom->score = ft_abs(bottom->data - result);
+	if ((*a)->score < second->score && (*a)->score < bottom->score)
+		pb(a, b);
+	else if (second->score < (*a)->score && second->score < bottom->score)
 	{
+		sa(a, 1);
 		pb(a, b);
-		rb(b, 1);
 	}
-	else
+	else if (bottom->score < second->score && bottom->score < (*a)->score)
+	{
+		rra(a, 1);
 		pb(a, b);
+	}
 }
 
 void	stack_init(t_stack **a, t_stack **b)
 {
+	t_stack	*current;
+	
+	current = *a;
 	stack_index(a);
 	stack_index(b);
+	while(current)
+	{
+		current->target = *b;
+		current = current->next;
+	}
+}
+
+void	push_median(t_stack **a, t_stack **b)
+{
+	long long	result;
+	int			size;
+	t_stack		*current;
+
+	result = 0;
+	size = stack_size(*a);
+	current = *a;
+	while (current)
+	{
+		result += current->data;
+		current = current->next;
+	}
+	result /= size;
+	best_score(a, b, result);
 }
 
 void	sort_algorithm(t_stack **a, t_stack **b)
 {
 	int	size_a;
-	int	size_b;
 
 	size_a = stack_size(*a);
 	if (size_a-- > 3 && !check_sorted(*a))
 		pb(a, b);
-	if (size_a-- > 3 && !check_sorted(*a))
-		pb(a, b);
-	if (check_sorted(*b))
-		sb(b, 1);
-	while(!check_sorted(*a))
+	size_a = stack_size(*a);
+	stack_init(a, b);
+	while(size_a >= 0)
 	{
-		while (size_a > 3 && !check_sorted(*a))
+		if ((*a)->data < (*a)->target->data)
 		{
-			best_score(a, b);
-			size_a = stack_size(*a);
+			pb(a, b);
+			rb(b, 1);
 		}
-		size_b = stack_size(*b);
-		ft_printf("ICCCCCI");
-		int i = 0;
-		while (size_b > 0 && !check_sorted(*a))
-		{
-			best_score(b, a);
-			size_b = stack_size(*b);
-			if (i > 999)
-				break ;
-			i++;
-		}
-		if (i > 999)
-			break ;
+		else
+			pb(a, b);
+		size_a = stack_size(*a);
 	}
 }
 
