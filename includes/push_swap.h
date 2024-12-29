@@ -6,7 +6,7 @@
 /*   By: bepoisso <bepoisso@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 17:23:54 by bepoisso          #+#    #+#             */
-/*   Updated: 2024/12/28 19:36:18 by bepoisso         ###   ########.fr       */
+/*   Updated: 2024/12/29 13:11:17 by bepoisso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,9 @@ typedef struct s_stack
 {
 	int				index;
 	int				data;
-	int				score;
+	int				push_cost;
+	int				median;
+	int				cheapest;
 	struct s_stack	*target;
 	struct s_stack	*next;
 	struct s_stack	*prev;

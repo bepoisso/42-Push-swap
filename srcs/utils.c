@@ -6,7 +6,7 @@
 /*   By: bepoisso <bepoisso@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/22 13:56:18 by bepoisso          #+#    #+#             */
-/*   Updated: 2024/12/28 17:51:41 by bepoisso         ###   ########.fr       */
+/*   Updated: 2024/12/29 13:12:17 by bepoisso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,22 +85,6 @@ void	stack_add_front(t_stack **stack, t_stack *new)
 	new->next = *stack;
 	(*stack)->prev = new;
 	*stack = new;
-}
-
-void	stack_index(t_stack **stack)
-{
-	t_stack	*current;
-	int		i;
-
-	if (!*stack || !stack)
-		return ;
-	i = 0;
-	current = *stack;
-	while (current)
-	{
-		current->index = ++i;
-		current = current->next;
-	}
 }
 
 long	ft_abs(long	nbr)
