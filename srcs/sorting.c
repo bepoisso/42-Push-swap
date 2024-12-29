@@ -6,7 +6,7 @@
 /*   By: bepoisso <bepoisso@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/22 13:56:15 by bepoisso          #+#    #+#             */
-/*   Updated: 2024/12/29 14:01:03 by bepoisso         ###   ########.fr       */
+/*   Updated: 2024/12/29 17:46:53 by bepoisso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,33 @@ void	stack_target_a(t_stack *a, t_stack *b)
 	}
 }
 
+void	stack_target_b(t_stack *a, t_stack *b)
+{
+	t_stack	*current;
+	t_stack	*target;
+	long	best;
+
+	while(b)
+	{
+		best = LONG_MAX;
+		current = a;
+		while (current)
+		{
+			if (current->data > b->data && current->data < best)
+			{
+				best = current->data;
+				target = current;
+			}
+			current = current->next;
+		}
+		if (best == LONG_MAX)
+			b->target = find_lowest(a);
+		else
+			b->target = target;
+		b = b->next;
+	}
+}
+
 void	stack_index(t_stack **stack)
 {
 	t_stack	*current;
@@ -181,6 +208,13 @@ void	init_info_a(t_stack **a, t_stack **b)
 	set_cheapest(*a);
 }
 
+void	init_info_b(t_stack **a, t_stack **b)
+{
+	stack_index(a);
+	stack_index(b);
+	stack_target_b(*a, *b);
+}
+
 t_stack	*find_cheapest(t_stack *stack)
 {
 	if (!stack)
@@ -239,12 +273,33 @@ void	push_to_b(t_stack **a, t_stack **b)
 	if (!cheapest)
 		return ;
 	if (cheapest->median && cheapest->target->median)
-		rotate_nodes(a, b, cheapest);
-	else if (!(cheapest->median) && !(cheapest->target->median))
 		rev_rotate_nodes(a, b, cheapest);
+	else if (!(cheapest->median) && !(cheapest->target->median))
+		rotate_nodes(a, b, cheapest);
 	get_on_top(a, cheapest, 'a');
 	get_on_top(b, cheapest->target, 'b');
 	pb(a, b);
+}
+
+void	push_to_a(t_stack **a, t_stack **b)
+{
+	get_on_top(a, (*b)->target, 'a');
+	pa(a, b, 1);
+}
+
+void	min_on_top(t_stack **a)
+{
+	t_stack	*min;
+
+	min = find_lowest(*a);
+
+	while (min != *a)
+	{
+		if (min->median)
+			rra(a, 1);
+		else
+			ra(a, 1);
+	}
 }
 
 void	sort_algorithm(t_stack **a, t_stack **b)
@@ -256,28 +311,39 @@ void	sort_algorithm(t_stack **a, t_stack **b)
 		pb(a, b);
 	if (--size > 3 && !check_sorted(*a))
 		pb(a, b);
-	while (size > 3 /* && !check_sorted(*a) */)
+	while (size > 3 && !check_sorted(*a))
 	{
 		init_info_a(a, b);
 		push_to_b(a, b);
 		size--;
 	}
 	sort_three(a);
-	/* while(*b)
+	while(*b)
 	{
 		init_info_b(a, b);
 		push_to_a(a, b);
-		// push toutes les node b dans la stack a
-	// On calcule la target de chaque node b
-		// la target est le nombre le plus grand et le plus prets
-	// On push la node au dessus de ca target
-		// si la target est au dessus de la mediane
-			// on rotate (ra) jusqua avoir la target en haut
-		// si la target est en dessuous de la mediane
-			// on revers rotate (rra) jusqua avoir la target en haut
 	}
 	stack_index(a);
-	min_on_top(a); */
+	min_on_top(a);
+}
+
+void	stack_free(t_stack **stack)
+{
+	t_stack	*current;
+
+	current = stack_last(*stack);
+	while (*stack != current)
+	{
+		current->next = NULL;
+		current->prev = NULL;
+		current->target = NULL;
+		free(current);
+		current = stack_last(*stack);
+	}
+	current->next = NULL;
+	current->prev = NULL;
+	current->target = NULL;
+	free(current);
 }
 
 void	sorting(t_stack **a, t_stack **b)
@@ -291,4 +357,6 @@ void	sorting(t_stack **a, t_stack **b)
 		sort_three(a);
 	else if (size > 3)
 		sort_algorithm(a, b);
+	// stack_free(a);
+	// stack_free(b);
 }
