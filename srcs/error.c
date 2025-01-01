@@ -6,7 +6,7 @@
 /*   By: bepoisso <bepoisso@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/01 15:58:53 by bepoisso          #+#    #+#             */
-/*   Updated: 2025/01/01 16:33:03 by bepoisso         ###   ########.fr       */
+/*   Updated: 2025/01/01 21:21:27 by bepoisso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,11 +62,9 @@ int	check_sort(int *tab, int size)
 
 int	handle_error(int ac, char **av)
 {
-	if (ac <= 1)
-		return (ft_printf("Error\nmissing arg\n"), 1);
 	if (check_chars(av, ac) && ac > 2)
-		return (ft_printf("Error\narguments\n"), 1);
+		return (ft_putstr_fd("Error\narguments\n", 1), 1);
 	if (ac == 2 && check_char(av[1]))
-		return (ft_printf("Error\narguments\n"), 1);
+		return (ft_putstr_fd("Error\narguments\n", 1), 1);
 	return (0);
 }

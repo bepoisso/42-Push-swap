@@ -6,7 +6,7 @@
 /*   By: bepoisso <bepoisso@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 17:23:54 by bepoisso          #+#    #+#             */
-/*   Updated: 2025/01/01 19:20:01 by bepoisso         ###   ########.fr       */
+/*   Updated: 2025/01/01 21:24:06 by bepoisso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ int		check_sort(int *tab, int size);
 int		handle_error(int ac, char **av);
 
 //_________________Parser_________________
+void	parser(int *ac, char ***av, int **tab, int *size);
 int		*parser_multarg(char **s, int ac);
 int		*parser_singlearg(char *s, int *size);
 t_stack	*stack_parser(int *tab, int size);

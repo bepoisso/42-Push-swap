@@ -6,7 +6,7 @@
 /*   By: bepoisso <bepoisso@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/27 10:15:40 by bepoisso          #+#    #+#             */
-/*   Updated: 2025/01/01 19:20:47 by bepoisso         ###   ########.fr       */
+/*   Updated: 2025/01/01 21:23:48 by bepoisso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,4 +80,15 @@ void	print_stack(t_stack *stack)
 		stack = stack->next;
 	}
 	ft_printf("-------------\n");
+}
+
+void	parser(int *ac, char ***av, int **tab, int *size)
+{
+	if (*ac != 2)
+	{
+		*tab = parser_multarg(*av, *ac - 1);
+		*size = *ac - 1;
+	}
+	else
+		*tab = parser_singlearg(*av[0], size);
 }

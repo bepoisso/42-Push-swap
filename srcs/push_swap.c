@@ -6,7 +6,7 @@
 /*   By: bepoisso <bepoisso@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/22 13:56:13 by bepoisso          #+#    #+#             */
-/*   Updated: 2025/01/01 19:37:13 by bepoisso         ###   ########.fr       */
+/*   Updated: 2025/01/01 21:24:16 by bepoisso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,7 @@ int	main(int ac, char **av)
 	if (handle_error(ac, av))
 		return (1);
 	av++;
-	if (ac != 2)
-	{
-		tab = parser_multarg(av, ac - 1);
-		size = ac - 1;
-	}
-	else
-		tab = parser_singlearg(av[0], &size);
+	parser(&ac, &av, &tab, &size);
 	if (tab == NULL)
 		return (1);
 	a = stack_parser(tab, size);
