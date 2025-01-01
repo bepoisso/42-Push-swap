@@ -6,7 +6,7 @@
 /*   By: bepoisso <bepoisso@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/01 16:10:49 by bepoisso          #+#    #+#             */
-/*   Updated: 2025/01/01 17:45:46 by bepoisso         ###   ########.fr       */
+/*   Updated: 2025/01/01 19:21:05 by bepoisso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ void	init_info_b(t_stack **a, t_stack **b)
 
 void	get_on_top(t_stack **stack, t_stack *top, char which)
 {
-	
 	while (*stack != top)
 	{
 		if (which == 'a')

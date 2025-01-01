@@ -6,7 +6,7 @@
 /*   By: bepoisso <bepoisso@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/22 13:56:13 by bepoisso          #+#    #+#             */
-/*   Updated: 2025/01/01 16:49:23 by bepoisso         ###   ########.fr       */
+/*   Updated: 2025/01/01 19:18:49 by bepoisso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ int	main(int ac, char **av)
 	if (check_sort(tab, size))
 		return (free(tab), 0);
 	a = stack_parser(tab, size);
-	b = NULL;
 	free(tab);
 	sorting(&a, &b);
 	free(a);
