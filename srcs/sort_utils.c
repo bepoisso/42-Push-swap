@@ -6,7 +6,7 @@
 /*   By: bepoisso <bepoisso@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/01 16:06:42 by bepoisso          #+#    #+#             */
-/*   Updated: 2025/01/01 16:13:37 by bepoisso         ###   ########.fr       */
+/*   Updated: 2025/01/01 17:07:17 by bepoisso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,18 +82,14 @@ void	min_on_top(t_stack **a)
 void	stack_free(t_stack **stack)
 {
 	t_stack	*current;
+	t_stack	*next;
 
-	current = stack_last(*stack);
-	while (*stack != current)
+	current = *stack;
+	while (current)
 	{
-		current->next = NULL;
-		current->prev = NULL;
-		current->target = NULL;
+		next = current->next;
 		free(current);
-		current = stack_last(*stack);
+		current = next;
 	}
-	current->next = NULL;
-	current->prev = NULL;
-	current->target = NULL;
-	free(current);
+	*stack = NULL;
 }

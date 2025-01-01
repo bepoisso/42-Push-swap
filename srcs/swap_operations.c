@@ -6,7 +6,7 @@
 /*   By: bepoisso <bepoisso@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/01 15:53:12 by bepoisso          #+#    #+#             */
-/*   Updated: 2025/01/01 16:12:24 by bepoisso         ###   ########.fr       */
+/*   Updated: 2025/01/01 18:27:09 by bepoisso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,17 @@
 // Ne fait rien s’il n’y en a qu’un ou aucun.
 void	sa(t_stack **a, int print)
 {
-	t_stack	*temp;
-
 	if (!*a)
 		return ;
 	if (stack_size(*a) < 2)
 		return ;
-	temp = (*a)->next;
-	(*a)->next->prev = *a;
-	(*a)->next = (*a)->next->next;
-	stack_add_front(a, temp);
+	*a = (*a)->next;
+	(*a)->prev->prev = *a;
+	(*a)->prev->next = (*a)->next;
+	if ((*a)->next)
+		(*a)->next->prev = (*a)->prev;
+	(*a)->next = (*a)->prev;
+	(*a)->prev = NULL;
 	if (print)
 		ft_printf("sa\n");
 }

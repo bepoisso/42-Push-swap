@@ -6,7 +6,7 @@
 /*   By: bepoisso <bepoisso@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/22 13:56:18 by bepoisso          #+#    #+#             */
-/*   Updated: 2025/01/01 15:56:11 by bepoisso         ###   ########.fr       */
+/*   Updated: 2025/01/01 18:08:10 by bepoisso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,16 +42,8 @@ int	stack_size(t_stack *stack)
 
 t_stack	*stack_last(t_stack *stack)
 {
-	int	i;
-	int	size;
-
-	i = 0;
-	size = stack_size(stack);
-	while (i < size - 1)
-	{
+	while (stack->next)
 		stack = stack->next;
-		i++;
-	}
 	return (stack);
 }
 
@@ -74,15 +66,17 @@ void	stack_add_back(t_stack **stack, t_stack *new)
 
 void	stack_add_front(t_stack **stack, t_stack *new)
 {
-	if (!stack)
+	if (!stack || !new)
 		return ;
 	if (!*stack)
 	{
 		*stack = new;
 		(*stack)->next = NULL;
+		(*stack)->prev = NULL;
 		return ;
 	}
 	new->next = *stack;
+	new->prev = NULL;
 	(*stack)->prev = new;
 	*stack = new;
 }

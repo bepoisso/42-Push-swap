@@ -6,7 +6,7 @@
 /*   By: bepoisso <bepoisso@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/22 13:56:15 by bepoisso          #+#    #+#             */
-/*   Updated: 2025/01/01 16:31:32 by bepoisso         ###   ########.fr       */
+/*   Updated: 2025/01/01 18:52:26 by bepoisso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,15 +32,18 @@ void	sort_algorithm(t_stack **a, t_stack **b)
 	int	size;
 
 	size = stack_size(*a);
-	if (--size > 3 && !check_sorted(*a))
+	if (size > 3 && !check_sorted(*a))
+	{
 		pb(a, b);
-	if (--size > 3 && !check_sorted(*a))
+		size--;
+	}
+	if (size > 3 && !check_sorted(*a))
 		pb(a, b);
 	while (size > 3 && !check_sorted(*a))
 	{
 		init_info_a(a, b);
 		push_to_b(a, b);
-		size--;
+		size = stack_size(*a);
 	}
 	sort_three(a);
 	while (*b)

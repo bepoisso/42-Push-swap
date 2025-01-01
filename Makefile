@@ -6,7 +6,7 @@
 #    By: bepoisso <bepoisso@student.42perpignan.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/21 18:34:37 by bepoisso          #+#    #+#              #
-#    Updated: 2025/01/01 16:49:44 by bepoisso         ###   ########.fr        #
+#    Updated: 2025/01/01 16:57:08 by bepoisso         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -69,6 +69,6 @@ debug: re
 	gdb -tui -q push_swap
 
 val: re
-	@valgrind --leak-check=full --track-origins=yes --show-leak-kinds=all ./push_swap "1 2 3"
+	@valgrind --leak-check=full --track-origins=yes --show-leak-kinds=all ./push_swap 3 1 4 2
 
 .PHONY: all clean fclean re

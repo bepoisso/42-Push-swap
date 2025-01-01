@@ -6,7 +6,7 @@
 /*   By: bepoisso <bepoisso@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/27 10:15:40 by bepoisso          #+#    #+#             */
-/*   Updated: 2025/01/01 16:48:21 by bepoisso         ###   ########.fr       */
+/*   Updated: 2025/01/01 18:15:28 by bepoisso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,9 +72,11 @@ t_stack	*stack_parser(int *tab, int size)
 
 void	print_stack(t_stack *stack)
 {
+	ft_printf("\n----Stack----\n");
 	while (stack)
 	{
-		ft_printf("%d : %d\n", stack->index, stack->data);
+		ft_printf("index:%d data:%d ptr:%p next:%p prev:%p\n", stack->index, stack->data, stack, stack->next, stack->prev);
 		stack = stack->next;
 	}
+	ft_printf("-------------\n");
 }
