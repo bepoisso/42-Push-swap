@@ -6,7 +6,7 @@
 #    By: bepoisso <bepoisso@student.42perpignan.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/21 18:34:37 by bepoisso          #+#    #+#              #
-#    Updated: 2024/12/27 18:39:50 by bepoisso         ###   ########.fr        #
+#    Updated: 2025/01/01 16:49:44 by bepoisso         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,10 +25,18 @@ INC_DIR = ./includes
 
 SRC_FILES=\
 			push_swap.c\
-			operations.c\
-			sorting.c\
+			push_operations.c\
+			swap_operations.c\
+			rotate_operations.c\
+			rotate_operations_pt2.c\
+			sort.c\
+			sort_cost.c\
+			sort_init.c\
+			sort_target.c\
+			sort_utils.c\
 			utils.c\
 			parser.c\
+			error.c\
 
 SRCS = $(addprefix $(SRC_DIR)/, $(SRC_FILES))
 OBJS = $(addprefix $(OBJ_DIR)/, $(SRC_FILES:.c=.o))
@@ -59,5 +67,8 @@ re: fclean all
 
 debug: re
 	gdb -tui -q push_swap
+
+val: re
+	@valgrind --leak-check=full --track-origins=yes --show-leak-kinds=all ./push_swap "1 2 3"
 
 .PHONY: all clean fclean re

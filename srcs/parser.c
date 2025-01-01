@@ -6,7 +6,7 @@
 /*   By: bepoisso <bepoisso@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/27 10:15:40 by bepoisso          #+#    #+#             */
-/*   Updated: 2024/12/30 19:33:41 by bepoisso         ###   ########.fr       */
+/*   Updated: 2025/01/01 16:48:21 by bepoisso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,12 @@ int	*parser_multarg(char **s, int ac)
 	{
 		j = 0;
 		if (ft_atoi(s[i]) > INT_MAX || ft_atoi(s[i]) < INT_MIN)
-			return (ft_printf("Error\nint size\n"), NULL);
+			return (free(tab), ft_printf("Error\nint size\n"), NULL);
 		tab[i] = (int)ft_atoi(s[i]);
 		while (j < i)
 		{
 			if (tab[j] == tab[i])
-				return (ft_printf("Error\ndouble\n"), NULL);
+				return (free(tab), ft_printf("Error\ndouble\n"), NULL);
 			j++;
 		}
 		i++;
@@ -42,12 +42,15 @@ int	*parser_multarg(char **s, int ac)
 int	*parser_singlearg(char *s, int *size)
 {
 	char	**result;
+	int		*tab;
 
 	*size = 0;
 	result = ft_split(s, ' ');
 	while (result[*size])
 		(*size)++;
-	return (parser_multarg(result, *size));
+	tab = parser_multarg(result, *size);
+	free_2d(result);
+	return (tab);
 }
 
 t_stack	*stack_parser(int *tab, int size)
@@ -67,11 +70,11 @@ t_stack	*stack_parser(int *tab, int size)
 	return (stack);
 }
 
-void print_stack(t_stack *stack)
+void	print_stack(t_stack *stack)
 {
 	while (stack)
 	{
-		ft_printf("%d : %d\n",stack->index, stack->data);
+		ft_printf("%d : %d\n", stack->index, stack->data);
 		stack = stack->next;
 	}
 }

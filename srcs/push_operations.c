@@ -1,43 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.c                                        :+:      :+:    :+:   */
+/*   push_operations.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bepoisso <bepoisso@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/22 13:56:13 by bepoisso          #+#    #+#             */
-/*   Updated: 2025/01/01 16:49:23 by bepoisso         ###   ########.fr       */
+/*   Created: 2025/01/01 15:51:44 by bepoisso          #+#    #+#             */
+/*   Updated: 2025/01/01 15:52:53 by bepoisso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-int	main(int ac, char **av)
+// Prend le premier élément au sommet de b et le met sur a.
+// Ne fait rien si b est vide.
+void	pa(t_stack **a, t_stack **b, int print)
 {
-	int		*tab;
-	int		size;
-	t_stack	*a;
-	t_stack	*b;
+	t_stack	*temp;
 
-	if (handle_error(ac, av))
-		return (1);
-	av++;
-	if (ac != 2)
-	{
-		tab = parser_multarg(av, ac - 1);
-		size = ac - 1;
-	}
-	else
-		tab = parser_singlearg(av[0], &size);
-	if (tab == NULL)
-		return (1);
-	if (check_sort(tab, size))
-		return (free(tab), 0);
-	a = stack_parser(tab, size);
-	b = NULL;
-	free(tab);
-	sorting(&a, &b);
-	free(a);
-	free(b);
-	return (0);
+	temp = *b;
+	*b = (*b)->next;
+	stack_add_front(a, temp);
+	if (print)
+		ft_printf("pa\n");
+}
+
+// Prend le premier élément au sommet de a et le met sur b.
+// Ne fait rien si a est vide.
+void	pb(t_stack **a, t_stack **b)
+{
+	pa(b, a, 0);
+	ft_printf("pb\n");
 }

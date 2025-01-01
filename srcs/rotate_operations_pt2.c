@@ -1,43 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.c                                        :+:      :+:    :+:   */
+/*   rotate_operations_pt2.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bepoisso <bepoisso@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/22 13:56:13 by bepoisso          #+#    #+#             */
-/*   Updated: 2025/01/01 16:49:23 by bepoisso         ###   ########.fr       */
+/*   Created: 2025/01/01 16:11:57 by bepoisso          #+#    #+#             */
+/*   Updated: 2025/01/01 16:12:40 by bepoisso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-int	main(int ac, char **av)
+// rra et rrb en même temps.
+void	rrr(t_stack **a, t_stack **b)
 {
-	int		*tab;
-	int		size;
-	t_stack	*a;
-	t_stack	*b;
+	rra(a, 0);
+	rrb(b, 0);
+	ft_printf("rrr\n");
+}
 
-	if (handle_error(ac, av))
-		return (1);
-	av++;
-	if (ac != 2)
-	{
-		tab = parser_multarg(av, ac - 1);
-		size = ac - 1;
-	}
-	else
-		tab = parser_singlearg(av[0], &size);
-	if (tab == NULL)
-		return (1);
-	if (check_sort(tab, size))
-		return (free(tab), 0);
-	a = stack_parser(tab, size);
-	b = NULL;
-	free(tab);
-	sorting(&a, &b);
-	free(a);
-	free(b);
-	return (0);
+void	rotate_nodes(t_stack **a, t_stack **b, t_stack *cheapest)
+{
+	while (*a != cheapest && *b != cheapest->target)
+		rr(a, b);
+	stack_index(a);
+	stack_index(b);
+}
+
+void	rev_rotate_nodes(t_stack **a, t_stack **b, t_stack *cheapest)
+{
+	while (*a != cheapest && *b != cheapest->target)
+		rrr(a, b);
+	stack_index(a);
+	stack_index(b);
 }
