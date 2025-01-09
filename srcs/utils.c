@@ -6,7 +6,7 @@
 /*   By: bepoisso <bepoisso@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/22 13:56:18 by bepoisso          #+#    #+#             */
-/*   Updated: 2025/01/01 18:08:10 by bepoisso         ###   ########.fr       */
+/*   Updated: 2025/01/09 10:00:01 by bepoisso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,10 @@ t_stack	*stack_new(int data)
 {
 	t_stack	*new;
 
-	new = malloc(sizeof(t_stack));
+	new = (t_stack *)malloc(sizeof(t_stack));
 	if (!new)
 		return (NULL);
+	ft_memset(new, 0, sizeof(t_stack));
 	new->data = data;
 	new->next = NULL;
 	new->prev = NULL;
