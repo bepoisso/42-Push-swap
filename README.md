@@ -11,6 +11,7 @@ Push Swap is a project that challenges you to develop a program to sort a stack 
   <img height="200" src="https://raw.githubusercontent.com/Benjamin-poisson/My_image_bank/refs/heads/main/pushswap_success.png"  />
 </div>
 
+## Example
 <div align="center">
   <img src="https://raw.githubusercontent.com/Benjamin-poisson/My_image_bank/refs/heads/main/pushswap_exp.gif"  />
 </div>
