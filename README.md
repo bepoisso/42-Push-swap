@@ -11,6 +11,10 @@ Push Swap is a project that challenges you to develop a program to sort a stack 
   <img height="200" src="https://raw.githubusercontent.com/Benjamin-poisson/My_image_bank/refs/heads/main/pushswap_success.png"  />
 </div>
 
+<div align="center">
+  <img src="https://raw.githubusercontent.com/Benjamin-poisson/My_image_bank/refs/heads/main/pushswap_exp.gif"  />
+</div>
+
 ## Objectives
 
 The goal of this project is to write a program that sorts a stack of integers using only two stacks (A and B) and a predefined set of operations. You'll learn about sorting algorithms, data structures (stacks), and the importance of optimization.
